@@ -1,0 +1,6 @@
+body{font-family:Arial;background:#111;color:#fff;padding:20px}
+.wrap{display:flex;gap:20px}
+textarea{width:520px;height:300px}
+table{width:100%;border-collapse:collapse;margin-top:20px}
+td,th{border:1px solid #555;padding:6px}
+button{margin:5px;padding:8px 14px}

@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>JUGULTOTO - Neon Cyan</title>
+<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+<style>
+    iframe{
+    width:100%;
+    height:100vh;
+    border:none;
+}
+html, body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden; /* Menonaktifkan scroll */
+}
+</style>
+
+<script>
+/* =========================================
+   BLOK KLIK KANAN
+========================================= */
+document.addEventListener('contextmenu', function(e) {
+  e.preventDefault();
+});
+
+
+/* =========================================
+   BLOK SHORTCUT KEYBOARD
+========================================= */
+document.addEventListener('keydown', function(e) {
+
+  // Ctrl + U
+  if (e.ctrlKey && e.key.toLowerCase() === 'u') {
+    e.preventDefault();
+    return false;
+  }
+
+  // Ctrl + Shift + I
+  if (e.ctrlKey && e.shiftKey && e.key.toLowerCase() === 'i') {
+    e.preventDefault();
+    return false;
+  }
+
+  // Ctrl + Shift + J
+  if (e.ctrlKey && e.shiftKey && e.key.toLowerCase() === 'j') {
+    e.preventDefault();
+    return false;
+  }
+
+  // Ctrl + Shift + C
+  if (e.ctrlKey && e.shiftKey && e.key.toLowerCase() === 'c') {
+    e.preventDefault();
+    return false;
+  }
+
+  // F12
+  if (e.key === 'F12') {
+    e.preventDefault();
+    return false;
+  }
+
+});
+
+
+/* =========================================
+   PERINGATAN SAAT DEVTOOLS TERDETEKSI
+   CATATAN: TIDAK 100% AKURAT
+========================================= */
+
+(function() {
+
+  const threshold = 160;
+
+  setInterval(function() {
+
+    const widthDiff =
+      window.outerWidth - window.innerWidth;
+
+    const heightDiff =
+      window.outerHeight - window.innerHeight;
+
+    if (
+      widthDiff > threshold ||
+      heightDiff > threshold
+    ) {
+
+      console.clear();
+
+      // Jangan lakukan redirect jika tidak diperlukan
+      // Contoh:
+      // document.body.innerHTML = '';
+
+      console.log(
+        'HAYO MAU NGAPAIN LU KONTOL .'
+      );
+
+    }
+
+  }, 1000);
+
+})();
+</script>
+<body>
+
+
+   <iframe src=""></iframe>
+<canvas id="fire"></canvas>
+
+<div class="glo1w" id="glow"></div>
+<div class="glow" id="glow"></div>
+
+<header class="header">
+
+    <div class="logo">
+        <img src="https://i.postimg.cc/7ZX8XNFR/Chat-GPT-Image-15-Jul-2026-14-42-34.png" alt="Logo">
+    </div>
+
+    <div class="news-ticker">
+        <div class="news-trick">
+            <marquee direction='right'>
+                🔥 Selama hatimu belum menyerah, pertarunganmu belum berakhir 🔥
+            </marquee>
+        </div>
+    </div>
+
+    <nav>
+        <a href="home.html" class="btn">MASUK</a>
+    </nav>
+
+</header>
+<br>
+<section class="hero">
+</section>
+
+<footer>
+© 2026 JUGUL •2026 All Rights Reserved • Designed by JUGUL
+</footer>
+
+<script src="fire.js" defer></script>
+</body>
+</html>

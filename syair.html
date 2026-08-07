@@ -1,0 +1,876 @@
+  <!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Syair Generator</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700;900&family=Cinzel:wght@600;700;900&family=Playfair+Display:ital,wght@1,700&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+body{
+    font-family:'Cinzel',serif;
+    background:#0a0a0a;
+    min-height:100vh;
+    margin:0;
+    overflow-x:hidden;
+}
+
+.main-layout{
+    width:100%;
+    display:flex;
+    align-items:flex-start;
+    justify-content:flex-start;
+    position:relative;
+}
+
+/* TOOLS */
+.side-panel{
+    width:330px;
+    min-height:100vh;
+    position:fixed;
+    left:0;top:0;bottom:0;
+    background:#17191f;min-height:100vh;padding:25px;border-right:1px solid #3a3116}
+    backdrop-filter:blur(18px);
+    border-right:1px solid #b88700;
+    box-shadow:0 0 20px rgba(255,193,7,.15);
+    padding:20px;
+    overflow-y:auto;
+    z-index:999;
+}
+
+/* CANVAS */
+.cw{
+margin-left:340px;
+    width:100%;
+    display:flex;
+    justify-content:center;
+    align-items:flex-start;
+    padding:20px 0;
+}
+
+#card{
+    width:960px;
+    height:960px;
+  position:relative;overflow:hidden;
+  background-image:url("https://i.ibb.co/CXvhJHf/BAGROUND1.png");
+  background-size:cover;background-position:center;
+}
+.side-panel{
+    width:320px;
+    margin:0;
+    flex-shrink:0;
+}
+.cw{
+    flex:1;
+    display:flex;
+    justify-content:center;
+}
+
+.panel-body.always-open{
+    display:grid;
+    grid-template-columns:1fr;
+    gap:8px;
+}
+
+.cg{
+    display:flex;
+    flex-direction:column;
+}
+
+.cg label{
+    font-size:12px;
+    margin-bottom:2px;
+}
+
+.cg input,
+.cg select{
+    height:28px;
+    font-size:13px;
+}
+
+.btn-row{
+    display:flex;
+    flex-direction:column;
+    gap:8px;
+}
+
+.btn{
+    height:32px;
+    font-size:12px;
+    padding:0;
+}
+
+.panel-box{
+  width:100%;
+  background:linear-gradient(135deg,#1a1a1a,#2a2000);
+  border:2px none;
+  border-radius:10px;
+  overflow:hidden;
+}
+.panel-header{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:10px 14px;
+  cursor:pointer;
+  user-select:none;
+  border-bottom:1px solid rgba(200,150,44,.0);
+  transition:border-color .2s;
+}
+.panel-header.open{border-bottom:1px solid rgba(200,150,44,.3);}
+.panel-header h3{
+  color:#e4a906 ;
+  font-family:'Forum',serif;
+  font-size:20px;
+  letter-spacing:1.5px;
+  text-transform:none;
+  flex:1;
+  text-align:center;
+}
+.back-btn-wrap{
+    width:100%;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    margin:0 auto 15px;
+}
+
+.back-btn-wrap a{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    width:220px;      /* lebar tombol */
+    height:42px;
+
+    text-decoration:none;
+    text-align:center;
+
+    border-radius:6px;
+
+    background:linear-gradient(135deg,#515151,#464747,#424243);
+    color:#f29305;
+    font-family:'Cinzel',serif;
+    font-size:18px;
+    font-weight:700;
+}
+.panel-header .arrow{
+  color:#e69a04 ;font-size:20px;
+  transition:transform .25s;flex-shrink:0;
+}
+.panel-header.open .arrow{transform:rotate(180deg);}
+.panel-header.static{cursor:default;}
+.panel-header.static .arrow{display:none;}
+.panel-body{
+  max-height:0;
+  overflow:hidden;
+  transition:max-height .3s ease;
+}
+.panel-body.open{
+  max-height:600px;
+  overflow-y:auto;
+}
+.panel-body::-webkit-scrollbar{width:4px;}
+.panel-body::-webkit-scrollbar-track{background:rgba(0,0,0,.3);}
+.panel-body::-webkit-scrollbar-thumb{background:#fac801 ;border-radius:2px;}
+.panel-body.always-open{
+  max-height:none;
+  overflow:visible;
+  padding:10px 12px;
+  display:flex;
+  flex-direction:column;
+  gap:8px;
+}
+.cg{display:flex;flex-direction:column;gap:3px;}
+.cg label{color:#f79e03;font-size:18px;letter-spacing:1px;text-transform:uppercase;}
+.cg input,.cg select{
+  background:#4f4e4ef6;border:1px solid #eeba00 ;border-radius:5px;
+  color:#db9407;padding:6px 8px;font-family:'Cinzel',serif;font-size:16px;
+  width:100%;
+}
+.cg input:focus,.cg select:focus{outline:none;border-color:#e3a010 ;}
+.btn-row{display:flex;flex-direction:column;gap:6px;margin-top:2px;}
+.btn{
+  border:none;border-radius:6px;padding:9px 10px;
+  font-family:'Cinzel',serif;font-weight:700;font-size:18px;
+  letter-spacing:1px;cursor:pointer;text-transform:uppercase;
+  transition:all .2s;width:100%;
+}
+.btn:hover{transform:scale(1.03);}
+.btn-g{background:linear-gradient(135deg,#4c4c4c ,#585858 ,#5a5959 );color:#f39007;}
+.btn-r{background:linear-gradient(135deg,#525151,#434343,#545353);color:#ed9806;}
+.btn-dl{background:linear-gradient(135deg,#515151,#464747,#424243);color:#f29305fe;}
+
+.gt{font-family:'Cinzel Decorative',serif;font-weight:900;
+  background:linear-gradient(180deg,#fffbe0 0%,#fffbe0 18%,#fffbe0  40%,#fffbe0 58%,#fffbe0 76%,#fffbe0 92%,#fffbe0 100%);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+  text-align:center;display:block;white-space:nowrap;}
+.gt-syair{font-family:'Playfair Display',serif;font-style:italic;
+  background:linear-gradient(180deg,#fffbe0 0%,#fffbe0 18%,#fffbe0 40%,#fffbe0 58%,#fffbe0 76%,#fffbe0 92%,#fffbe0 100%);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+  display:block;text-align:center;}
+.dl-mode .gt,.dl-mode .gt-syair{
+  background:none !important;-webkit-background-clip:unset !important;
+  -webkit-text-fill-color:#fffbe0 !important;background-clip:unset !important;
+  color:#fffbe0 !important;text-shadow:0 2px 8px rgba(0,0,0,.95) !important;filter:none !important;}
+.el{position:absolute;z-index:10;cursor:move;user-select:none;}
+.el:hover{outline:1.5px dashed rgba(100,220,40,.7);}
+.el.active{outline:2px solid rgba(100,220,40,1);z-index:50;}
+.el:hover .el-ctrl{opacity:1;}
+.el-ctrl{position:absolute;top:-30px;left:50%;transform:translateX(-50%);
+  display:flex;gap:3px;align-items:center;background:rgba(0,0,0,.9);
+  border:1px solid #4a8000;border-radius:5px;padding:3px 6px;
+  opacity:0;transition:opacity .15s;pointer-events:auto;white-space:nowrap;z-index:100;}
+.el-ctrl button{background:rgba(200,150,44,.2);border:1px solid rgba(200,150,44,.4);
+  color:#d0d5d5;font-size:10px;border-radius:3px;padding:2px 5px;cursor:pointer;
+  font-family:'Cinzel',serif;font-weight:700;line-height:1;}
+.el-ctrl button:hover{background:rgba(200,150,44,.5);}
+.el-ctrl .sv{color:#8adc40;font-size:9px;min-width:26px;text-align:center;font-family:monospace;}
+.rh{position:absolute;bottom:-5px;right:-5px;width:12px;height:12px;
+  background:#4adc20;border-radius:50%;cursor:se-resize;opacity:0;transition:opacity .15s;}
+.el:hover .rh,.el.active .rh{opacity:1;}
+
+#toast{position:fixed;bottom:28px;left:50%;transform:translateX(-50%) translateY(60px);
+  background:linear-gradient(135deg,#003300,#007700);color:#b8ff80;
+  font-family:'Cinzel',serif;font-size:11px;letter-spacing:1px;
+  padding:9px 22px;border-radius:7px;border:1px solid #00cc44;
+  z-index:99999;transition:transform .3s;pointer-events:none;}
+#toast.show{transform:translateX(-50%) translateY(0);}
+#dl-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.78);z-index:9999;align-items:center;justify-content:center;flex-direction:column;gap:14px;}
+#dl-overlay.show{display:flex;}
+#dl-overlay p{color:#4be8e8;font-family:'Cinzel',serif;font-size:13px;letter-spacing:2px;}
+.spinner{width:42px;height:42px;border:4px solid rgba(200,150,44,.2);border-top-color:#4bd0e8;border-radius:50%;animation:spin .8s linear infinite;}
+@keyframes spin{to{transform:rotate(360deg);}}
+</style>
+</head>
+<body>
+<div class="main-layout">
+  <div class="side-panel">
+    
+<div class="logo-area" style="text-align:center;margin-bottom:20px;">
+<img src="https://i.postimg.cc/7ZX8XNFR/Chat-GPT-Image-15-Jul-2026-14-42-34.png"
+style="max-width:220px;width:100%;height:auto;">
+</div>
+<div class="back-btn-wrap">
+    <a href="home.html"> Back </a>
+</div>
+
+<div class="panel-box">
+      <div class="panel-header static">
+        <h3> Generator</h3>
+      </div>
+      <div class="panel-body always-open">
+        <div class="cg">
+          <label>Pasaran</label>
+          <select id="sel-pas" onchange="setPasaran(this.value)">
+            <option value="sgp">Singapore</option><option value="hk">Hongkong</option>
+            <option value="sydney">Sydney</option><option value="macau">Toto Macau</option>
+            <option value="cambodia">Cambodia</option><option value="bangkok">Bangkok</option>
+            <option value="huahin">Huahin</option><option value="poipet">Poipet</option>
+            <option value="brunei">Brunei</option><option value="magnum">Magnum</option>
+            <option value="pcso">PCSO</option><option value="kentucky">Kentucky</option>
+            <option value="california">California</option><option value="florida">Florida</option>
+            <option value="newyork">New York</option><option value="nevada">Nevada</option>
+            <option value="oregon">Oregon</option><option value="carolina">Carolina</option>
+            <option value="bullseye">Bullseye</option><option value="kingkong">King Kong</option>
+            <option value="hokidraw">Hoki Draw</option><option value="totoMali">Toto Mali</option>
+          </select>
+        </div>
+        <div class="cg">
+          <label>Shio</label>
+          <select id="sel-shio" onchange="setShio(this.selectedIndex)">
+            <option value="0">Tikus</option>
+            <option value="1">Kerbau</option>
+            <option value="2">Harimau</option>
+            <option value="3">Kelinci</option>
+            <option value="4">Naga</option>
+            <option value="5">Ular</option>
+            <option value="6">Kuda</option>
+            <option value="7" selected>Kambing</option>
+            <option value="8">Monyet</option>
+            <option value="9">Ayam</option>
+            <option value="10">Anjing</option>
+            <option value="11">Babi</option>
+          </select>
+        </div>
+        <div class="cg"><label>Tanggal</label><input type="date" id="inp-date"></div>
+        <div class="cg"><label>Colok (4 angka)</label><input type="text" id="inp-colok" maxlength="4" placeholder="1234"></div>
+        <div class="cg"><label>BBFS (8 angka)</label><input type="text" id="inp-bbfs" maxlength="8" placeholder="12345678"></div>
+        <div class="cg"><label>Angka Tarung</label><input type="text" id="inp-tarung" maxlength="15" placeholder="1-2-3-4-5"></div>
+        <div class="btn-row">
+          <button class="btn btn-g" onclick="randomAll()">Random</button>
+          <button class="btn btn-r" onclick="generate()"> Ganti Syair</button>
+          <button class="btn btn-dl" onclick="downloadCard()"> Download </button>
+          
+</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="cw">
+    <div id="card">
+
+    <div class="el" id="el-logo" style="top:0px;left:413px;">
+      <div class="el-ctrl">
+        <button onclick="rz('el-logo','w',-10)">W-</button><span class="sv" id="sv-lw">14</span><button onclick="rz('el-logo','w',10)">W+</button>
+        <button onclick="rz('el-logo','h',-10)">H-</button><span class="sv" id="sv-lh">16</span><button onclick="rz('el-logo','h',10)">H+</button>
+      </div>
+      <div class="rh" data-el="el-logo"></div>
+    </div>
+
+    <div class="el" id="el-date" style="top:267px;left:375px;">
+      <div class="el-ctrl">
+        <button onclick="fs('date-txt',-1)">A-</button><span class="sv" id="sv-dfs">20</span><button onclick="fs('date-txt',1)">A+</button>
+      </div>
+      <span id="date-txt" class="gt" style="font-size:20px;letter-spacing:2px;">30 MEI 2026</span>
+      <div class="rh" data-el="el-date"></div>
+    </div>
+
+    <div class="el" id="el-pasaran" style="top:87px;left:365px;">
+      <div class="el-ctrl">
+        <button onclick="rz('el-pasaran','w',-5)">W-</button><span class="sv" id="sv-pw">416</span><button onclick="rz('el-pasaran','w',5)">W+</button>
+        <button onclick="rz('el-pasaran','h',-5)">H-</button><span class="sv" id="sv-ph">83</span><button onclick="rz('el-pasaran','h',5)">H+</button>
+      </div>
+      <img id="pas-img" src="" crossorigin="anonymous" onerror="this.style.display='none'" alt=""
+        style="width:240px;height:90px;object-fit:contain;display:none;filter:drop-shadow(0 0 18px rgba(0, 128, 255, 1));">
+      <div class="rh" data-el="el-pasaran"></div>
+    </div>
+
+    <div class="el" id="el-c1" style="top:422px;left:46px;">
+      <div class="el-ctrl"><button onclick="fs('c1',-2)">A-</button><span class="sv" id="sv-c1">46</span><button onclick="fs('c1',2)">A+</button></div>
+      <span id="c1" class="gt" style="font-size:46px;line-height:1;display:block;">3</span>
+      <div class="rh" data-el="el-c1"></div>
+    </div>
+    <div class="el" id="el-c2" style="top:424px;left:215px;">
+      <div class="el-ctrl"><button onclick="fs('c2',-2)">A-</button><span class="sv" id="sv-c2">46</span><button onclick="fs('c2',2)">A+</button></div>
+      <span id="c2" class="gt" style="font-size:46px;line-height:1;display:block;">5</span>
+      <div class="rh" data-el="el-c2"></div>
+    </div>
+    <div class="el" id="el-c3" style="top:581px;left:48px;">
+      <div class="el-ctrl"><button onclick="fs('c3',-2)">A-</button><span class="sv" id="sv-c3">46</span><button onclick="fs('c3',2)">A+</button></div>
+      <span id="c3" class="gt" style="font-size:46px;line-height:1;display:block;">8</span>
+      <div class="rh" data-el="el-c3"></div>
+    </div>
+    <div class="el" id="el-c4" style="top:579px;left:203px;">
+      <div class="el-ctrl"><button onclick="fs('c4',-2)">A-</button><span class="sv" id="sv-c4">46</span><button onclick="fs('c4',2)">A+</button></div>
+      <span id="c4" class="gt" style="font-size:46px;line-height:1;display:block;">9</span>
+      <div class="rh" data-el="el-c4"></div>
+    </div>
+
+    <div class="el" id="el-bbfs" style="top:385px;left:766px;">
+      <div class="el-ctrl"><button onclick="fs('bbfs-num',-1)">A-</button><span class="sv" id="sv-bfs">34</span><button onclick="fs('bbfs-num',1)">A+</button></div>
+      <div id="bbfs-num" class="gt" style="font-size:34px;letter-spacing:4px;line-height:1.55;text-align:center;">1 2 3 4<br>5 6 7 8</div>
+      <div class="rh" data-el="el-bbfs"></div>
+    </div>
+
+    <div class="el" id="el-tarung" style="top:589px;left:744px;">
+      <div class="el-ctrl"><button onclick="fs('tarung-num',-1)">A-</button><span class="sv" id="sv-tfs">31</span><button onclick="fs('tarung-num',1)">A+</button></div>
+      <div id="tarung-num" class="gt" style="font-size:31px;letter-spacing:3px;text-align:center;">1-2-3-4-5</div>
+      <div class="rh" data-el="el-tarung"></div>
+    </div>
+
+    <div class="el" id="el-shio" style="top:323px;left:290px;">
+      <div class="el-ctrl">
+        <button onclick="rz('el-shio','w',-5)">W-</button><span class="sv" id="sv-sw">100</span><button onclick="rz('el-shio','w',5)">W+</button>
+        <button onclick="rz('el-shio','h',-5)">H-</button><span class="sv" id="sv-sh">125</span><button onclick="rz('el-shio','h',5)">H+</button>
+      </div>
+      <img id="shio-img" src=""
+     style="width:410px;height:410px;min-width:410px;min-height:410px;
+            max-width:410px;max-height:410px;
+            object-fit:contain;
+            display:none;
+            filter:drop-shadow(0 0 20px rgba(200,150,44,.7));">
+      <div class="rh" data-el="el-shio"></div>
+    </div>
+
+    <div class="el" id="el-syair" style="top:756px;left:372px;">
+      <div class="el-ctrl"><button onclick="fs('syair-txt',-1)">A-</button><span class="sv" id="sv-sfs">15</span><button onclick="fs('syair-txt',1)">A+</button></div>
+      <span id="syair-txt" class="gt-syair" style="font-size:15px;line-height:1.75;display:block;text-align:center;">–</span>
+      <div class="rh" data-el="el-syair"></div>
+</div>
+  </div>
+</div>
+
+<div id="dl-overlay"><div class="spinner"></div><p id="dl-msg">Sedang memproses...</p></div>
+
+<script>
+const RAW='https://raw.githubusercontent.com/rianarielsmb88-svg/SHIO/master/';
+const PASARAN=[
+  {id:'sgp',name:'Singapore',file:'LOGO SINGAPORE.png'},
+  {id:'hk',name:'Hongkong',file:'logo hongkong-lotto.png'},
+  {id:'sydney',name:'Sydney',file:'logo sydney lotto.png'},
+  {id:'macau',name:'Toto Macau',file:'logo toto macau.png'},
+  {id:'cambodia',name:'Cambodia',file:'logo cambodia.png'},
+  {id:'bangkok',name:'Bangkok',file:'logo bangkok.png'},
+  {id:'huahin',name:'Huahin',file:'logo huahin.png'},
+  {id:'poipet',name:'Poipet',file:'logo poipet.png'},
+  {id:'brunei',name:'Brunei',file:'logo brunei.png'},
+  {id:'magnum',name:'Magnum',file:'logo magnum.jpg'},
+  {id:'pcso',name:'PCSO',file:'LOGO PCSO.png'},
+  {id:'kentucky',name:'Kentucky',file:'LOGO KENTUCKY.png'},
+  {id:'california',name:'California',file:'logo california.png'},
+  {id:'florida',name:'Florida',file:'logo florida.png'},
+  {id:'newyork',name:'New York',file:'logo newyork.png'},
+  {id:'nevada',name:'Nevada',file:'logo nevada.png'},
+  {id:'oregon',name:'Oregon',file:'logo oregon.png'},
+  {id:'carolina',name:'Carolina',file:'logo CAROLINa.png'},
+  {id:'bullseye',name:'Bullseye',file:'logo bulseye.png'},
+  {id:'kingkong',name:'King Kong',file:'logo king kong.png'},
+  {id:'hokidraw',name:'Hoki Draw',file:'logo hoki draw.png'},
+  {id:'totoMali',name:'Toto Mali',file:'logo toto mali.png'},
+];
+const SHIO=[
+  {name:'Tikus',file:'TIKUS.png'},{name:'Kerbau',file:'KERBAU.png'},
+  {name:'Harimau',file:'HARIMAU.png'},{name:'Kelinci',file:'KELINCI.png'},
+  {name:'Naga',file:'NAGA.png'},{name:'Ular',file:'ULAR.png'},
+  {name:'Kuda',file:'KUDA.png'},{name:'Kambing',file:'KAMBING.png'},
+  {name:'Monyet',file:'MONYET.png'},{name:'Ayam',file:'AYAM.png'},
+  {name:'Anjing',file:'ANJING.png'},{name:'Babi',file:'BABI.png'},
+];
+const SYAIR=[
+  "Bunga mekar di taman indah,\nAngka jitu membawa berkah.\nSatu dua tiga empat lima,\nRezeki mengalir tiada tara.",
+  "Air mengalir ke laut luas,\nPetunjuk datang terang dan jelas.\nHitung baik angka pilihan,\nMudah-mudahan turun keberuntungan.",
+  "Bintang bersinar di langit malam,\nAngka turun dari kedalaman alam.\nSemoga hoki menyertai kita,\nRezeki lancar tiada dusta.",
+  "Naga emas terbang melayang,\nBawa hoki sepanjang zaman.\nAngka sakti telah tertulis,\nRezeki mengalir tiada habis.",
+  "Bulan purnama bersinar terang,\nAngka jitu kan datang serang.\nSemua petunjuk sudah nyata,\nKemenangan ada di mata.",
+  "Singa mengaum di padang luas,\nAngka hadir terang dan jelas.\nTiga enam delapan sembilan,\nKemenangan ada di tangan.",
+  "Awan berarak di langit biru,\nPetunjuk angka datang selalu.\nSemua hewan membawa tanda,\nNomor jitu ada di sana.",
+  "Dari timur matahari terbit,\nAngka jitu makin mendekat.\nHitung cermat dan teliti,\nRezeki datang pasti.",
+  "Lautan luas penuh misteri,\nAngka sakti hadir kembali.\nDua angka di depan mata,\nHoki datang membawa serta.",
+  "Pohon bambu tumbuh tinggi,\nAngka jitu turun hari ini.\nDua kali tiga sama enam,\nKemenangan pasti akan datang.",
+  "Di balik awan ada cahaya,\nAngka berkilau penuh pesona.\nSemua bilangan sudah terpilih,\nKeberuntungan datang berlipih.",
+  "Roda berputar tiada henti,\nAngka jitu datang kembali.\nSatu hingga sembilan berjajar,\nRezeki mengalir semakin besar.",
+];
+
+// ===== ANTI-REPEAT STATE =====
+let lastPasIdx = -1;
+let lastShioIdx = -1;
+let lastColok = '';
+let lastBBFS = '';
+let lastTarung = '';
+let curPas = 'bullseye';
+let curShio = 7;
+
+// Pick random index, never same as last
+function pickDiff(total, last) {
+  if (total <= 1) return 0;
+  let idx;
+  do { idx = Math.floor(Math.random() * total); } while (idx === last);
+  return idx;
+}
+
+// ===== SYAIR SHUFFLE DECK — semua 12 harus keluar dulu sebelum ada yang diulang =====
+let syairDeck = [];
+let syairUsed = [];
+
+function shuffleArray(arr) {
+  const a = [...arr];
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
+}
+
+function initSyairDeck() {
+  syairDeck = shuffleArray([...Array(SYAIR.length).keys()]);
+  syairUsed = [];
+}
+
+function pickNextSyair() {
+  if (syairDeck.length === 0) {
+    const lastUsed = syairUsed[syairUsed.length - 1];
+    let newDeck;
+    do {
+      newDeck = shuffleArray([...Array(SYAIR.length).keys()]);
+    } while (newDeck[0] === lastUsed);
+    syairDeck = newDeck;
+    syairUsed = [];
+  }
+  const idx = syairDeck.shift();
+  syairUsed.push(idx);
+  return idx;
+}
+
+// Generate unique 4-digit colok (never same as last)
+function rColok() {
+  const digits = [0,1,2,3,4,5,6,7,8,9];
+  let result;
+  let tries = 0;
+  do {
+    for (let i = digits.length-1; i > 0; i--) {
+      const j = Math.floor(Math.random()*(i+1));
+      [digits[i],digits[j]]=[digits[j],digits[i]];
+    }
+    result = digits.slice(0,4).sort((a,b)=>a-b).join('');
+    tries++;
+  } while (result === lastColok && tries < 20);
+  lastColok = result;
+  return result;
+}
+
+// Generate unique 8-digit BBFS (never same as last)
+function rBBFS() {
+  const digits = [0,1,2,3,4,5,6,7,8,9];
+  let result;
+  let tries = 0;
+  do {
+    for (let i = digits.length-1; i > 0; i--) {
+      const j = Math.floor(Math.random()*(i+1));
+      [digits[i],digits[j]]=[digits[j],digits[i]];
+    }
+    result = digits.slice(0,8).sort((a,b)=>a-b).join('');
+    tries++;
+  } while (result === lastBBFS && tries < 20);
+  lastBBFS = result;
+  return result;
+}
+
+// Generate unique angka tarung (never same as last)
+function rTarung(n) {
+  const digits = [0,1,2,3,4,5,6,7,8,9];
+  let result;
+  let tries = 0;
+  do {
+    for (let i = digits.length-1; i > 0; i--) {
+      const j = Math.floor(Math.random()*(i+1));
+      [digits[i],digits[j]]=[digits[j],digits[i]];
+    }
+    result = digits.slice(0,n).sort((a,b)=>a-b).join('-');
+    tries++;
+  } while (result === lastTarung && tries < 20);
+  lastTarung = result;
+  return result;
+}
+
+function setPasaran(id){
+  curPas=id;
+  const p=PASARAN.find(x=>x.id===id); if(!p)return;
+  const img=document.getElementById('pas-img');
+  img.src=RAW+encodeURIComponent(p.file);
+  img.style.display='block';
+  img.onerror=()=>{img.style.display='none';};
+}
+function setShio(idx){
+  curShio=Number(idx);
+  const s=SHIO[curShio]; if(!s)return;
+  const img=document.getElementById('shio-img');
+  img.src=RAW+encodeURIComponent(s.file);
+  img.style.display='block';
+  img.onerror=()=>{img.style.display='none';};
+  document.getElementById('sel-shio').value=curShio;
+}
+
+// ===== DRAG =====
+function initDrag(){
+  document.querySelectorAll('.el').forEach(el=>{
+    let drag=false,sx,sy,ox,oy;
+    const start=(cx,cy)=>{
+      drag=true;
+      document.querySelectorAll('.el').forEach(x=>x.classList.remove('active'));
+      el.classList.add('active');
+      sx=cx;sy=cy;
+      ox=parseInt(el.style.left)||0;
+      oy=parseInt(el.style.top)||0;
+    };
+    const move=(cx,cy)=>{if(!drag)return;el.style.left=(ox+cx-sx)+'px';el.style.top=(oy+cy-sy)+'px';};
+    const end=()=>{drag=false;};
+    el.addEventListener('mousedown',e=>{if(e.target.closest('.el-ctrl,.rh'))return;start(e.clientX,e.clientY);e.preventDefault();});
+    document.addEventListener('mousemove',e=>move(e.clientX,e.clientY));
+    document.addEventListener('mouseup',end);
+    el.addEventListener('touchstart',e=>{if(e.target.closest('.el-ctrl,.rh'))return;start(e.touches[0].clientX,e.touches[0].clientY);e.preventDefault();},{passive:false});
+    document.addEventListener('touchmove',e=>{if(drag){move(e.touches[0].clientX,e.touches[0].clientY);e.preventDefault();}},{passive:false});
+    document.addEventListener('touchend',end);
+  });
+}
+
+// ===== RESIZE =====
+function initResize(){
+  document.querySelectorAll('.rh').forEach(handle=>{
+    const elId=handle.dataset.el;
+    let resizing=false,sx,sy,sw,sh;
+    const start=(cx,cy)=>{
+      resizing=true;sx=cx;sy=cy;
+      const el=document.getElementById(elId);
+      const img=el.querySelector('img');
+      if(img){sw=img.offsetWidth;sh=img.offsetHeight;}
+      else{sw=el.offsetWidth;sh=el.offsetHeight;}
+    };
+    const move=(cx,cy)=>{if(!resizing)return;applyRZ(elId,Math.max(20,sw+cx-sx),Math.max(14,sh+cy-sy));};
+    handle.addEventListener('mousedown',e=>{start(e.clientX,e.clientY);e.stopPropagation();e.preventDefault();});
+    document.addEventListener('mousemove',e=>{if(resizing)move(e.clientX,e.clientY);});
+    document.addEventListener('mouseup',()=>{resizing=false;});
+    handle.addEventListener('touchstart',e=>{start(e.touches[0].clientX,e.touches[0].clientY);e.stopPropagation();e.preventDefault();},{passive:false});
+    document.addEventListener('touchmove',e=>{if(resizing)move(e.touches[0].clientX,e.touches[0].clientY);},{passive:false});
+    document.addEventListener('touchend',()=>{resizing=false;});
+  });
+}
+function applyRZ(elId,w,h){
+  const el=document.getElementById(elId);const img=el.querySelector('img');if(!img)return;
+  img.style.width=w+'px';img.style.height=h+'px';
+  const wM={'el-logo':'sv-lw','el-pasaran':'sv-pw','el-shio':'sv-sw'};
+  const hM={'el-logo':'sv-lh','el-pasaran':'sv-ph','el-shio':'sv-sh'};
+  if(wM[elId])document.getElementById(wM[elId]).textContent=Math.round(w);
+  if(hM[elId])document.getElementById(hM[elId]).textContent=Math.round(h);
+}
+function rz(elId,axis,delta){
+  const img=document.getElementById(elId).querySelector('img');if(!img)return;
+  if(axis==='w'){const nw=Math.max(20,img.offsetWidth+delta);img.style.width=nw+'px';const sv={'el-logo':'sv-lw','el-pasaran':'sv-pw','el-shio':'sv-sw'}[elId];if(sv)document.getElementById(sv).textContent=nw;}
+  else{const nh=Math.max(14,img.offsetHeight+delta);img.style.height=nh+'px';const sv={'el-logo':'sv-lh','el-pasaran':'sv-ph','el-shio':'sv-sh'}[elId];if(sv)document.getElementById(sv).textContent=nh;}
+}
+function fs(txtId,delta){
+  const el=document.getElementById(txtId);const nf=Math.max(8,parseFloat(el.style.fontSize||16)+delta);
+  el.style.fontSize=nf+'px';
+  const m={'date-txt':'sv-dfs','c1':'sv-c1','c2':'sv-c2','c3':'sv-c3','c4':'sv-c4','bbfs-num':'sv-bfs','tarung-num':'sv-tfs','syair-txt':'sv-sfs'};
+  if(m[txtId])document.getElementById(m[txtId]).textContent=Math.round(nf);
+}
+
+// ===== RANDOM ALL — ANTI-REPEAT =====
+function randomAll(){
+  const piNew = pickDiff(PASARAN.length, lastPasIdx);
+  lastPasIdx = piNew;
+  curPas = PASARAN[piNew].id;
+  document.getElementById('sel-pas').value = curPas;
+
+  const siNew = pickDiff(SHIO.length, lastShioIdx);
+  lastShioIdx = siNew;
+  curShio = siNew;
+  document.getElementById('sel-shio').value = curShio;
+
+  const colokNew = rColok();
+  const bbfsNew = rBBFS();
+  const tarungNew = rTarung(5);
+
+  document.getElementById('inp-colok').value = colokNew;
+  document.getElementById('inp-bbfs').value = bbfsNew;
+  document.getElementById('inp-tarung').value = tarungNew;
+
+  generate();
+}
+
+function generate(){
+  const dv=document.getElementById('inp-date').value;
+  if(dv){
+    const dt=new Date(dv+'T00:00:00');
+    const M=['JANUARI','FEBRUARI','MARET','APRIL','MEI','JUNI','JULI','AGUSTUS','SEPTEMBER','OKTOBER','NOVEMBER','DESEMBER'];
+    document.getElementById('date-txt').textContent=`${dt.getDate()} ${M[dt.getMonth()]} ${dt.getFullYear()}`;
+  }
+
+  const cv=(document.getElementById('inp-colok').value||rColok()).padEnd(4,'0');
+  ['c1','c2','c3','c4'].forEach((id,i)=>document.getElementById(id).textContent=cv[i]||'?');
+
+  const bv=document.getElementById('inp-bbfs').value||rBBFS();
+  document.getElementById('bbfs-num').innerHTML=bv.slice(0,4).split('').join(' ')+'<br>'+bv.slice(4,8).split('').join(' ');
+
+  document.getElementById('tarung-num').textContent=document.getElementById('inp-tarung').value||rTarung(5);
+
+  const siNew = pickNextSyair();
+  const s = SYAIR[siNew];
+  document.getElementById('syair-txt').innerHTML=s.replace(/\n/g,'<br>');
+
+  setPasaran(curPas);
+  setShio(curShio);
+}
+
+// ===== DOWNLOAD PNG =====
+async function downloadCard(){
+  const overlay=document.getElementById('dl-overlay');
+  document.getElementById('dl-msg').textContent='Sedang memproses...';
+  overlay.classList.add('show');
+  const card=document.getElementById('card');
+  const ctrls=card.querySelectorAll('.el-ctrl,.rh');
+  ctrls.forEach(el=>el.style.display='none');
+  card.querySelectorAll('.el').forEach(el=>{el.classList.remove('active');el.style.outline='none';});
+  try{
+    const imgs=[...card.querySelectorAll('img')];
+    await Promise.all(imgs.map(img=>{if(img.complete&&img.naturalHeight!==0)return Promise.resolve();return new Promise(res=>{img.onload=res;img.onerror=res;});}));
+    await new Promise(r=>setTimeout(r,300));
+    card.classList.add('dl-mode');
+    await new Promise(r=>setTimeout(r,80));
+    const canvas=await html2canvas(card,{
+      useCORS:true,allowTaint:false,scale:1,width:960,height:960,backgroundColor:null,logging:false,imageTimeout:20000,
+      onclone:(doc)=>{const c=doc.getElementById('card');if(c){c.classList.add('dl-mode');c.querySelectorAll('.el-ctrl,.rh').forEach(el=>el.style.display='none');c.querySelectorAll('.el').forEach(el=>{el.classList.remove('active');el.style.outline='none';});}}
+    });
+    card.classList.remove('dl-mode');
+    const dateStr=document.getElementById('date-txt').textContent.replace(/\s+/g,'-');
+    const pasName=(PASARAN.find(p=>p.id===curPas)||{name:'syair'}).name.replace(/\s+/g,'_');
+    const link=document.createElement('a');
+    link.download=`syair_${pasName}_${dateStr}.png`;
+    link.href=canvas.toDataURL('image/png');
+    link.click();
+  }catch(e){card.classList.remove('dl-mode');alert('Gagal: '+e.message);}
+  finally{ctrls.forEach(el=>el.style.display='');overlay.classList.remove('show');}
+}
+
+// ===== SIMPAN POSISI KE FILE =====
+function savePositions(){
+  const elIds=['el-logo','el-date','el-pasaran','el-c1','el-c2','el-c3','el-c4','el-bbfs','el-tarung','el-shio','el-syair'];
+  const positions={};
+  elIds.forEach(id=>{
+    const el=document.getElementById(id);
+    if(!el)return;
+    const img=el.querySelector('img');
+    const txt=el.querySelector('[id]');
+    positions[id]={
+      top:el.style.top,
+      left:el.style.left,
+      imgW:img?img.style.width:'',
+      imgH:img?img.style.height:'',
+      txtFs:txt?txt.style.fontSize:''
+    };
+  });
+
+  const doctype='<!DOCTYPE html>';
+  let html=document.documentElement.outerHTML;
+
+  elIds.forEach(id=>{
+    const p=positions[id];
+    if(!p)return;
+
+    const elPattern=new RegExp(`(id="${id}"[^>]*style=")([^"]*)(")`, 'g');
+    html=html.replace(elPattern,(match,pre,styleStr,post)=>{
+      styleStr=styleStr.replace(/top:[^;]+;?/,'').replace(/left:[^;]+;?/,'');
+      styleStr=`top:${p.top};left:${p.left};`+styleStr.trim();
+      return pre+styleStr+post;
+    });
+  });
+
+  const card=document.getElementById('card');
+  const cardClone=card.cloneNode(true);
+  cardClone.querySelectorAll('.el-ctrl').forEach(el=>el.remove());
+  cardClone.querySelectorAll('.rh').forEach(el=>el.remove());
+  cardClone.querySelectorAll('.el').forEach(el=>{
+    el.classList.remove('active');
+    el.style.outline='none';
+    el.style.cursor='move';
+  });
+  const cardHTML=cardClone.outerHTML;
+
+  const fullHTML=document.documentElement.outerHTML;
+  const cardStart=fullHTML.indexOf('<div class="cw"><div id="card">');
+  const cardEnd=fullHTML.indexOf('</div></div>\n  <!-- END CARD -->');
+  let newHTML;
+  if(cardStart>-1&&cardEnd>-1){
+    newHTML=fullHTML.substring(0,cardStart)+'<div class="cw">'+cardHTML+fullHTML.substring(cardEnd+'</div></div>\n  <!-- END CARD -->'.length);
+  } else {
+    newHTML=fullHTML.replace(/<div id="card"[^>]*>[\s\S]*?<\/div>\s*<\/div>\s*<!-- END CARD -->/, '<div class="cw">'+cardHTML);
+  }
+
+  savePositionsRobust(positions);
+}
+
+function savePositionsRobust(positions){
+  const src=`<!DOCTYPE html>\n`+document.documentElement.outerHTML;
+
+  const card=document.getElementById('card');
+  const elEls=card.querySelectorAll('.el');
+  
+  const styleMap={};
+  elEls.forEach(el=>{
+    const id=el.id;
+    const top=el.style.top||'0px';
+    const left=el.style.left||'0px';
+    const img=el.querySelector('img');
+    const imgStyle=img?`width:${img.style.width};height:${img.style.height};`:'';
+    styleMap[id]={top,left,imgStyle,el};
+  });
+
+  let newSrc=src;
+  
+  Object.entries(styleMap).forEach(([id,{top,left}])=>{
+    const re=new RegExp(`(<div class="el" id="${id}" style=")[^"]*(")`,'g');
+    newSrc=newSrc.replace(re,`$1top:${top};left:${left};$2`);
+  });
+
+  const logoImg=document.getElementById('logo-img');
+  if(logoImg){
+    const re=/(id="logo-img"[^>]*style=")[^"]*(")/g;
+    newSrc=newSrc.replace(re,(m,pre,post)=>{
+      return `${pre}width:${logoImg.style.width};height:${logoImg.style.height};object-fit:contain;display:block;filter:drop-shadow(0 0 14px rgba(200,150,44,.85));${post}`;
+    });
+  }
+  const pasImg=document.getElementById('pas-img');
+  if(pasImg){
+    const re=/(id="pas-img"[^>]*style=")[^"]*(")/g;
+    newSrc=newSrc.replace(re,(m,pre,post)=>{
+      return `${pre}width:${pasImg.style.width};height:${pasImg.style.height};object-fit:contain;display:${pasImg.style.display||'none'};filter:drop-shadow(0 0 18px rgba(200,150,44,.9));${post}`;
+    });
+  }
+  const shioImg=document.getElementById('shio-img');
+  if(shioImg){
+    const re=/(id="shio-img"[^>]*style=")[^"]*(")/g;
+    newSrc=newSrc.replace(re,(m,pre,post)=>{
+      return `${pre}width:${shioImg.style.width};height:${shioImg.style.height};object-fit:contain;display:${shioImg.style.display||'none'};filter:drop-shadow(0 0 20px rgba(200,150,44,.7));${post}`;
+    });
+  }
+
+  const fontEls=[
+    {id:'date-txt', extra:'letter-spacing:2px;'},
+    {id:'c1', extra:'line-height:1;display:block;'},
+    {id:'c2', extra:'line-height:1;display:block;'},
+    {id:'c3', extra:'line-height:1;display:block;'},
+    {id:'c4', extra:'line-height:1;display:block;'},
+    {id:'bbfs-num', extra:'letter-spacing:4px;line-height:1.55;text-align:center;'},
+    {id:'tarung-num', extra:'letter-spacing:3px;text-align:center;'},
+    {id:'syair-txt', extra:'line-height:1.75;display:block;text-align:center;'},
+  ];
+  fontEls.forEach(({id,extra})=>{
+    const el=document.getElementById(id);
+    if(!el)return;
+    const fs=el.style.fontSize||'16px';
+    const re=new RegExp(`(id="${id}"[^>]*style=")[^"]*(")`,'g');
+    newSrc=newSrc.replace(re,`$1font-size:${fs};${extra}$2`);
+  });
+
+  const blob=new Blob([newSrc],{type:'text/html;charset=utf-8'});
+  const url=URL.createObjectURL(blob);
+  const link=document.createElement('a');
+  link.download='syair_generator_saved.html';
+  link.href=url;
+  link.click();
+  setTimeout(()=>URL.revokeObjectURL(url),3000);
+
+  showToast('✅ Posisi tersimpan ke file!');
+}
+
+function showToast(msg){
+  const t=document.getElementById('toast');
+  t.textContent=msg||'Done';
+  t.classList.add('show');
+  setTimeout(()=>t.classList.remove('show'),2500);
+}
+
+function init(){
+  initSyairDeck();
+  const t=new Date();t.setDate(t.getDate()+1);
+  const y=t.getFullYear(),m=String(t.getMonth()+1).padStart(2,'0'),d=String(t.getDate()).padStart(2,'0');
+  document.getElementById('inp-date').value=`${y}-${m}-${d}`;
+  initDrag();initResize();
+  randomAll();
+}
+
+init();
+</script>
+</body>
+</html>
+<script>
+document.addEventListener('contextmenu', e => e.preventDefault());
+
+document.addEventListener('keydown', function(e) {
+    if (e.key === 'F12') e.preventDefault();
+    if (e.ctrlKey && e.shiftKey && ['I','J','C'].includes(e.key.toUpperCase())) e.preventDefault();
+    if (e.ctrlKey && e.key.toUpperCase() === 'U') e.preventDefault();
+});
+
+setInterval(() => {
+    const before = new Date();
+    debugger;
+    const after = new Date();
+    if (after - before > 100) {
+        document.body.innerHTML = '<h1 style="text-align:center;margin-top:50px;">Akses ditolak</h1>';
+    }
+}, 1000);
+</script>

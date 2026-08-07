@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<title>Dashboard Rekonsiliasi Zonamain vs QRIS</title>
+<style>
+body{font-family:Arial;background:#f4f6f9;margin:20px}
+.container{display:flex;gap:20px}
+.box{flex:1;background:#fff;padding:15px;border-radius:8px;box-shadow:0 2px 8px #ccc}
+textarea{width:100%;height:220px}
+button{padding:8px 14px;margin:6px;border:none;border-radius:6px;cursor:pointer}
+.primary{background:#1976d2;color:#fff}
+.danger{background:#d32f2f;color:#fff}
+.success{background:#2e7d32;color:#fff}
+table{width:100%;border-collapse:collapse;margin-top:15px;background:#fff}
+th,td{border:1px solid #ddd;padding:8px}
+th{background:#1976d2;color:#fff}
+.info{margin-top:10px;font-weight:bold}
+</style>
+</head>
+<body>
+
+<h2>Dashboard Rekonsiliasi Zonamain vs QRIS</h2>
+
+<div class="container">
+<div class="box">
+<h3>Paste Zonamain</h3>
+<textarea id="zona"></textarea><br>
+<button class="danger" onclick="hapusZona()">🗑 Hapus Data Zonamain</button>
+</div>
+
+<div class="box">
+<h3>Paste QRIS</h3>
+<textarea id="qris"></textarea><br>
+<button class="danger" onclick="hapusQris()">🗑 Hapus Data QRIS</button>
+</div>
+</div>
+
+<button class="primary" onclick="proses()">🔍 Cari Selisih</button>
+<button class="success" onclick="copyHasil()">📋 Copy Hasil</button>
+<button onclick="bersihkanSemua()">🧹 Bersihkan Semua</button>
+
+<div class="info" id="info"></div>
+
+<table>
+<thead>
+<tr>
+<th>MEMBER</th>
+<th>TICKET</th>
+<th>NOMINAL</th>
+</tr>
+</thead>
+<tbody id="hasil"></tbody>
+</table>
+
+<script>
+function parseTSV(txt){
+ txt=txt.trim();
+ if(!txt) return [];
+ let rows=txt.split(/\r?\n/).map(r=>r.split("\t"));
+ if(rows.length<2) return [];
+ let head=rows.shift().map(x=>x.trim().toUpperCase());
+ return rows.map(r=>{
+   let o={};
+   head.forEach((h,i)=>o[h]=r[i]||"");
+   return o;
+ });
+}
+
+function proses(){
+ const z=parseTSV(document.getElementById("zona").value);
+ const q=parseTSV(document.getElementById("qris").value);
+
+ let map={};
+ z.forEach(r=>{
+   let id=(r["ORDER ID"]||"").trim();
+   if(id) map[id]=true;
+ });
+
+ let hasil=[];
+ q.forEach(r=>{
+   let t=(r["TICKET"]||"").trim();
+   if(t && !map[t]){
+      hasil.push({
+        member:r["MEMBER"]||"",
+        ticket:t,
+        nominal:r["RECORD VALUE"]||r["NOMINAL"]||""
+      });
+   }
+ });
+
+ const tb=document.getElementById("hasil");
+ tb.innerHTML="";
+ hasil.forEach(x=>{
+   tb.innerHTML+=`<tr><td>${x.member}</td><td>${x.ticket}</td><td>${x.nominal}</td></tr>`;
+ });
+
+ document.getElementById("info").innerHTML=
+ "Data Zonamain : "+z.length+
+ " | Data QRIS : "+q.length+
+ " | Selisih : "+hasil.length;
+}
+
+function copyHasil(){
+ let rows=[["MEMBER","TICKET","NOMINAL"]];
+ document.querySelectorAll("#hasil tr").forEach(tr=>{
+   let d=[...tr.children].map(td=>td.innerText);
+   rows.push(d);
+ });
+ let txt=rows.map(r=>r.join("\t")).join("\n");
+ navigator.clipboard.writeText(txt).then(()=>alert("Hasil berhasil dicopy."));
+}
+
+function hapusZona(){document.getElementById("zona").value="";}
+function hapusQris(){document.getElementById("qris").value="";}
+function bersihkanSemua(){
+ hapusZona();
+ hapusQris();
+ document.getElementById("hasil").innerHTML="";
+ document.getElementById("info").innerHTML="";
+}
+</script>
+
+</body>
+</html>

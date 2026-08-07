@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<title>Dashboard Rekonsiliasi QRIS</title>
+<link rel="stylesheet" href="style1.css">
+</head>
+<body>
+<h2>Dashboard Rekonsiliasi QRIS</h2>
+
+<div class="wrap">
+<div>
+<h3>Zonamain</h3>
+<textarea id="zm" placeholder="Paste data Zonamain"></textarea><br>
+<button onclick="document.getElementById('zm').value=''">Delete Zonamain</button>
+</div>
+
+<div>
+<h3>QRIS</h3>
+<textarea id="qr" placeholder="Paste data QRIS"></textarea><br>
+<button onclick="document.getElementById('qr').value=''">Delete QRIS</button>
+</div>
+</div>
+
+<button onclick="compare()">Bandingkan</button>
+<button onclick="copyTable()">Copy Hasil</button>
+
+<table id="out">
+<thead><tr><th>USER ID</th><th>ORDER ID</th><th>RRN</th><th>AMOUNT</th></tr></thead>
+<tbody></tbody>
+</table>
+
+<script src="script.js"></script>
+</body>
+</html>

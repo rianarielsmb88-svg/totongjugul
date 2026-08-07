@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dashboard IS JUGUL</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{
+    font-family:Poppins,sans-serif;
+    color:#fff;
+    display:flex;   
+
+    background-image:url("https://i.postimg.cc/bJDQVY32/Chat-GPT-Image-25-Jul-2026-14-48-00.png");
+    background-size:cover;
+    background-position:center;
+    background-repeat:no-repeat;
+    background-attachment:fixed;
+}
+
+body::before{
+    content:"";
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,.55);
+    z-index:-1;
+}
+.sidebar{width:230px;background:#17191f;min-height:100vh;padding:25px;border-right:1px solid #3a3116}
+..logo{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    margin-bottom:30px;
+}
+
+.logo img{
+    width:160px;      /* sesuaikan ukuran */
+    height:auto;
+    display:block;
+    object-fit:contain;
+}
+.menu a{display:block;text-decoration:none;color:#ddd;padding:14px 18px;margin-bottom:12px;border-radius:12px;transition:.3s}
+.menu a:hover,.menu a.active{background:#d6a514;color:#111;font-weight:600}
+.main{flex:1;padding:30px}
+.header{display:flex;justify-content:space-between;align-items:center;background:#1b1d24;border:1px solid #7a6015;padding:18px 25px;border-radius:18px}
+.header h1{color:#f4d35e}
+.clock{
+    background:#262932;
+    padding:12px 22px;
+    border-radius:18px;
+    border:1px solid #8d6f18;
+    color:#f4d35e;
+    font-weight:700;
+    text-align:center;
+    line-height:1.5;
+    min-width:220px;
+}  
+.search{margin:25px 0}
+.search input{width:100%;padding:16px;border-radius:14px;border:1px solid #6b5613;background:#1b1d24;color:#fff}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:25px}
+.card{text-decoration:none;color:#fff;background:#1b1d24;border:1px solid #7a6015;border-radius:18px;padding:28px;transition:.3s;box-shadow:0 0 10px rgba(214,165,20,.15)}
+.card:hover{transform:translateY(-8px);box-shadow:0 0 25px rgba(214,165,20,.45)}
+.icon{font-size:42px}
+.card h2{margin:18px 0 10px;color:#f4d35e}
+.card p{color:#bbb} 
+.footer{margin-top:40px;text-align:center;color:#888}
+</style>
+</head>
+<body>
+
+<div class="sidebar">
+<div class="logo">
+    <a href="index.html">
+        <img src="https://i.postimg.cc/7ZX8XNFR/Chat-GPT-Image-15-Jul-2026-14-42-34.png" alt="Logo This_JUGUL">
+        
+    </a>
+</div>
+    <div class="menu">
+<a href="index.html">⚔️ Back</a>
+</div>
+
+</div>
+
+<div class="main">
+
+<div class="header">
+<div>
+<h1>Dashboard PERFECTO_JUGUL</h1>
+<p style="color:#aaaaaa"></p>
+</div>
+<div class="clock" id="jam">00:00:00</div>
+</div>
+
+<div class="search">
+<input type="text" placeholder="Cari tools premium...">
+</div>
+
+<div class="cards">
+
+<a class="card" href="index.html">
+<div class="icon">🏯</div>
+<h2>HOME</h2>
+<p>Kembali ke halaman utama website.</p>
+</a>    
+
+<a class="card" href="Prediksi.html">
+<div class="icon">⛩️</div>
+<h2>PREDIKSI</h2>
+<p>Masuk ke halaman Prediksi.</p>
+</a>
+
+<a class="card" href="Syair.html">
+<div class="icon">✨</div>
+<h2>SYAIR</h2>
+<p>Masuk ke halaman Syair.</p>
+
+<a class="card" href="qrisP2HIM.html">
+<div class="icon">✨</div>
+<h2>SYAIR</h2>
+<p>Masuk ke halaman Syair.</p>
+
+</a>
+</div>
+
+<div class="footer">
+Dashboard JUGUL © 2026
+</div>
+
+</div>
+
+<script>
+function updateClock(){
+const d=new Date();
+document.getElementById("jam").innerHTML=
+String(d.getHours()).padStart(2,"0")+":"+
+String(d.getMinutes()).padStart(2,"0")+":"+
+String(d.getSeconds()).padStart(2,"0");
+}
+setInterval(updateClock,1000);
+updateClock();
+</script>
+<script>
+function updateClock() {
+    const d = new Date();
+
+    const hari = [
+        "Minggu","Senin","Selasa","Rabu",
+        "Kamis","Jumat","Sabtu"
+    ];
+
+    const bulan = [
+        "Januari","Februari","Maret","April",
+        "Mei","Juni","Juli","Agustus",
+        "September","Oktober","November","Desember"
+    ];
+
+    const tanggal =
+        hari[d.getDay()] + ", " +
+        d.getDate() + " " +
+        bulan[d.getMonth()] + " " +
+        d.getFullYear();
+
+    const jam =
+        String(d.getHours()).padStart(2,"0") + ":" +
+        String(d.getMinutes()).padStart(2,"0") + ":" +
+        String(d.getSeconds()).padStart(2,"0");
+
+    document.getElementById("jam").innerHTML =
+        tanggal + "<br><span style='font-size:22px'>" + jam + "</span>";
+}
+
+setInterval(updateClock,1000);
+updateClock();
+</script>
+
+</body>
+</html>

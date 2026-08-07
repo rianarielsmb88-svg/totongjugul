@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Generator Prediksi</title>
+<style>
+body{
+    margin:0;
+    font-family:'Poppins',sans-serif;
+    color:#fff;
+
+    background:
+        linear-gradient(
+            rgba(0,0,0,.55),
+            rgba(0,0,0,.65)
+        ),
+        url("https://i.postimg.cc/Jn9HkJwd/59a945ef-092a-4b41-9a6a-40fabc7239d5.png");
+
+    background-size:cover;
+    background-position:center;
+    background-repeat:no-repeat;
+    background-attachment:fixed;
+
+    display:flex;
+}
+
+.sidebar{
+    width:330px;
+    min-height:100vh;
+
+    background:#17191f(111, 110, 110, 0.82);
+    backdrop-filter:blur(18px);
+    border-right:1px solid rgba(255,180,0,.3);
+
+    border-right:1px solid #b88700;
+
+    box-shadow:
+    0 0 20px rgba(255,193,7,.15);
+}
+
+.logo{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    width:100%;
+    margin:20px 0 25px;
+}
+
+.logo img{
+    display:block;
+    margin:auto;
+    max-width:250px;
+    max-height:120px;
+    object-fit:contain;
+}
+
+.logo-sidebar{
+    width:150px;
+    height:auto;
+    display:block;
+    margin:auto;
+}
+
+
+.logo-area h2{
+    color:#f6b608;
+    margin-top:10px;
+}
+
+.menu{
+    list-style:none;
+    padding:0;
+}
+
+.menu li{
+    margin:14px 18px;
+}
+.menu a{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    width:calc(100% - 12px);
+    min-height:64px;
+    box-sizing:border-box;
+    padding:16px 24px;
+    font-size:22px;
+
+    text-decoration:none;
+    color:#efb105;
+
+    background:#f8f009;
+    border:1px solid transparent;
+    border-radius:15px;
+
+    font-weight:600;
+    letter-spacing:.5px;
+
+    transition:.35s;
+}
+.menu a{
+
+    background:#262932;
+
+    color:#f9bd08;
+
+    border:1px solid transparent;
+
+    border-radius:15px;
+
+    transition:.35s;
+}
+
+.menu a:hover{
+
+    background:#30333d;
+
+    border-color:#FFD54F;
+
+    color:#FFD54F;
+
+    transform:translateX(6px);
+
+    box-shadow:
+    0 0 15px rgba(255,213,79,.25);
+}
+
+.main-content{
+    flex:1;
+    padding:40px;
+}
+.container{max-width:900px;margin:30px auto;padding:20px}
+.card{
+
+    background:#1f222b;
+
+    border:1px solid #b88700;
+
+    border-radius:22px;
+
+    box-shadow:
+
+    0 10px 25px rgba(0,0,0,.45),
+
+    0 0 20px rgba(255,193,7,.08);
+
+    padding:30px;
+}
+h1{
+    text-align:center;
+    color:#FFD84D;
+    text-shadow:
+        0 0 10px #FFD84D,
+        0 0 25px #FFB300,
+        0 0 50px #FF6600;
+}
+select,button{width:100%;padding:12px;margin:10px 0;border:none;border-radius:10px}
+select{
+    background:#111;
+    color:#f49d07;
+    border:2px solid rgba(255,180,0,.4);
+}
+
+select:focus{
+    border-color:#FFD84D;
+    box-shadow:0 0 15px #FFD84D;
+}
+button{
+    background:linear-gradient(135deg,#FFE66D,#FFB300,#FF7300);
+    color:#111;
+    font-weight:bold;
+    border-radius:50px;
+    box-shadow:
+        0 0 20px #FFD84D,
+        0 0 40px #FF7300;
+}
+button:hover{
+    transform:translateY(-4px);
+    box-shadow:
+        0 0 25px #FFE66D,
+        0 0 50px #FF9800,
+        0 0 80px #FF5E00;
+}
+.logo{text-align:right;margin:20px 0;display:right;justify-content:right;align-items:right}
+.logo img{max-width:240px;max-height:120px;display:right;margin:auto}
+.copy-btn{
+    background:linear-gradient(135deg,#FFE66D,#FFB300,#FF7300);
+    color:#111;
+    font-weight:bold;
+}
+table{width:100%;border-collapse:collapse;margin-top:20px}
+th,td{border:1px solid #f7d00a;padding:10px}
+th{
+    background:linear-gradient(90deg,#FFE66D,#FFB300);
+    color:#111;
+}
+
+td{
+    background:#141414;
+    color:#eeb007;
+    border-bottom:1px solid rgba(255,180,0,.15);
+}
+</style>
+</head>
+<body>
+    <div class="sidebar">
+
+    <div class="logo-area">
+        <img src="https://i.postimg.cc/7ZX8XNFR/Chat-GPT-Image-15-Jul-2026-14-42-34.png" class="logo-sidebar">    
+    </div>
+
+    <ul class="menu">
+     <li><a href="home.html"> Back </a></li>
+    </ul>
+
+</div>
+
+<div class="main-content">
+<div class="container">
+<div class="card">
+<h1>GENERATOR PREDIKSI</h1>
+
+<select id="pasaran">
+<option value="">-- Pilih Pasaran --</option>
+<option value="HOKI DRAW">HOKI DRAW</option>
+<option value="BANGKOK 0130">BANGKOK 0130</option>
+<option value="BANGKOK 0930">BANGKOK 0930</option>
+<option value="BRUNEI 02">BRUNEI 02</option>
+<option value="BRUNEI 14">BRUNEI 14</option>
+<option value="BRUNEI 21">BRUNEI 21</option>
+<option value="BULLSEYE">BULLSEYE</option>
+<option value="CALIFORNIA">CALIFORNIA</option>
+<option value="CAROLINADAY">CAROLINADAY</option>
+<option value="CAROLINAEVE">CAROLINAEVE</option>
+<option value="CHELSEA 11">CHELSEA 11</option>
+<option value="CHELSEA 15">CHELSEA 15</option>
+<option value="CHELSEA 19">CHELSEA 19</option>
+<option value="CHELSEA 21">CHELSEA 21</option>
+<option value="FLORIDAEVE">FLORIDAEVE</option>
+<option value="FLORIDAMID">FLORIDAMID</option>
+<option value="HONGKONG LOTTO">HONGKONG LOTTO</option>
+<option value="HUAHIN 0100">HUAHIN 0100</option>
+<option value="HUAHIN 1630">HUAHIN 1630</option>
+<option value="HUAHIN 2100">HUAHIN 2100</option>
+<option value="KENTUCKYEVE">KENTUCKYEVE</option>
+<option value="KENTUCKYMID">KENTUCKYMID</option>
+<option value="KING KONG4D SORE">KING KONG4D SORE</option>
+<option value="KING KONG4D MALAM">KING KONG4D MALAM</option>
+<option value="MAGNUM4D">MAGNUM4D</option>
+<option value="NEVADA">NEVADA</option>
+<option value="NEWYORKEVE">NEWYORKEVE</option>
+<option value="NEWYORKMID">NEWYORKMID</option>
+<option value="OREGON03">OREGON03</option>
+<option value="OREGON06">OREGON06</option>
+<option value="OREGON09">OREGON09</option>
+<option value="OREGON12">OREGON12</option>
+<option value="PCSO">PCSO</option>
+<option value="POIPET12">POIPET12</option>
+<option value="POIPET15">POIPET15</option>
+<option value="POIPET19">POIPET19</option>
+<option value="POIPET22">POIPET22</option>
+<option value="SINGAPORE">SINGAPORE</option>
+<option value="SYDNEY LOTTO">SYDNEY LOTTO</option>
+<option value="TOTOCAMBODIA">TOTOCAMBODIA</option>
+<option value="TOTOMALI1530">TOTOMALI1530</option>
+<option value="TOTOMALI2030">TOTOMALI2030</option>
+<option value="TOTOMALI2330">TOTOMALI2330</option>
+<option value="JAKARTA 1400">JAKARTA 1400</option>
+<option value="JAKARTA 2330">JAKARTA 2330</option>
+<option value="TOTOMACAU PAGI">TOTOMACAU PAGI</option>
+<option value="TOTOMACAU SIANG">TOTOMACAU SIANG</option>
+<option value="TOTOMACAU SORE">TOTOMACAU SORE</option>
+<option value="TOTOMACAU MALAM I">TOTOMACAU MALAM I</option>
+<option value="TOTOMACAU MALAM II">TOTOMACAU MALAM II</option>
+<option value="TOTOMACAU MALAM III">TOTOMACAU MALAM III</option>
+<option value="TOTOMACAU 5D SORE">TOTOMACAU 5D SORE</option>
+<option value="TOTOMACAU 5D MALAM">TOTOMACAU 5D MALAM</option>
+</select>
+
+<button onclick="generate()">GENERATE PREDIKSI</button>
+
+<div id="hasil"></div>
+
+</div>
+</div>
+
+<script>
+const shios=["Tikus","Kerbau","Harimau","Kelinci","Naga","Ular","Kuda","Kambing","Monyet","Ayam","Anjing","Babi"];
+
+const images = {
+            "HOKI DRAW": "https://hokidraw.com/assets/img/logo.png",
+            "BANGKOK 0130": "https://bangkokpoolstoday.com/assets/img/bangkokpools_logo.png",
+            "BANGKOK 0930": "https://bangkokpoolstoday.com/assets/img/bangkokpools_logo.png",
+            "BRUNEI 02": "https://bruneipools.com/assets/img/brunei-logo.png",
+            "BRUNEI 14": "https://bruneipools.com/assets/img/brunei-logo.png",
+            "BRUNEI 21": "https://bruneipools.com/assets/img/brunei-logo.png",
+            "BULLSEYE": "https://cdn.areabermain.club/assets/cdn/az4/2024/08/11/20240811/f07d4e2a6517ef1cea9e2a897e4abb98/nz-bullseye.png",
+            "CALIFORNIA": "https://cdn.areabermain.club/assets/cdn/az4/2024/08/11/20240811/7c3b7b0affd7880d2dddf918ba2ac258/calottlogo.png",
+            "CAROLINADAY": "https://nclottery.com/Site/GFX/NCEL_Alt.svg",
+            "CAROLINAEVE": "https://nclottery.com/Site/GFX/NCEL_Alt.svg",
+            "CHELSEA 11": "https://chelseapools.co.uk/assets/img/chelseaPools_logo.png",
+            "CHELSEA 15": "https://chelseapools.co.uk/assets/img/chelseaPools_logo.png",
+            "CHELSEA 19": "https://chelseapools.co.uk/assets/img/chelseaPools_logo.png",
+            "CHELSEA 21": "https://chelseapools.co.uk/assets/img/chelseaPools_logo.png",
+            "FLORIDAEVE": "https://cdn.areabermain.club/assets/cdn/az4/2024/08/11/20240811/a3e564ccb04c2b751ad4fa88c06e39c1/1-removebg-preview.png",
+            "FLORIDAMID": "https://cdn.areabermain.club/assets/cdn/az4/2024/08/11/20240811/a3e564ccb04c2b751ad4fa88c06e39c1/1-removebg-preview.png",
+            "HONGKONG LOTTO": "https://cdn.areabermain.club/assets/cdn/az1/2025/09/07/20250907/7d2086796fd3d3af9aaed27d19fd9170/hongkong-lotto-1.png",
+            "HUAHIN 0100": "https://huahinlottery.com/assets/img/logo.png",
+            "HUAHIN 1630": "https://huahinlottery.com/assets/img/logo.png",
+            "HUAHIN 2100": "https://huahinlottery.com/assets/img/logo.png",
+            "KENTUCKYEVE": "https://cdn.areabermain.club/assets/cdn/az4/2024/08/11/20240811/a5fafa0102d98ab3959ceb9bb1045729/kl-logo.png",
+            "KENTUCKYMID": "https://cdn.areabermain.club/assets/cdn/az4/2024/08/11/20240811/a5fafa0102d98ab3959ceb9bb1045729/kl-logo.png",
+            "KING KONG4D SORE": "https://cdn.areabermain.club/assets/cdn/az9/2024/11/26/20241126/d1f18e378e4a422b41ffe8d03065ce7d/logo-7.png",
+            "KING KONG4D MALAM": "https://cdn.areabermain.club/assets/cdn/az9/2024/11/26/20241126/d1f18e378e4a422b41ffe8d03065ce7d/logo-7.png",
+            "MAGNUM4D": "https://cdn.areabermain.club/assets/cdn/az4/2024/08/11/20240811/8889f1c5fc738b5148145100c08a0ebc/439-4390693-magnum-pengeluaran-magnum-4d-hari-clipart-removebg-preview.png",
+            "NEVADA": "https://www.nevadalottery.us/images/src/components/PageHead/images/logo.gif",
+            "NEWYORKEVE": "https://edit.nylottery.ny.gov/sites/default/files/logo-2179655b4229a219a9305b3f0e734bd0.png",
+            "NEWYORKMID": "https://edit.nylottery.ny.gov/sites/default/files/logo-2179655b4229a219a9305b3f0e734bd0.png",
+            "OREGON03": "https://cdn.areabermain.club/assets/cdn/az4/2024/08/11/20240811/81ec15c616becd5dafbb18ae7ba01828/logo-ol-black-horiz.png",
+            "OREGON06": "https://cdn.areabermain.club/assets/cdn/az4/2024/08/11/20240811/81ec15c616becd5dafbb18ae7ba01828/logo-ol-black-horiz.png",
+            "OREGON09": "https://cdn.areabermain.club/assets/cdn/az4/2024/08/11/20240811/81ec15c616becd5dafbb18ae7ba01828/logo-ol-black-horiz.png",
+            "OREGON12": "https://cdn.areabermain.club/assets/cdn/az4/2024/08/11/20240811/81ec15c616becd5dafbb18ae7ba01828/logo-ol-black-horiz.png",
+            "PCSO": "https://cdn.areabermain.club/assets/cdn/az4/2024/08/11/20240811/32b1d9cb48d2c0a9f1c7e77853565fa1/pcso.png",
+            "POIPET12": "https://poipetlottery.com/img/logo.png",
+            "POIPET15": "https://poipetlottery.com/img/logo.png",
+            "POIPET19": "https://poipetlottery.com/img/logo.png",
+            "POIPET22": "https://poipetlottery.com/img/logo.png",
+            "SINGAPORE": "https://cdn.areabermain.club/assets/cdn/az4/2024/08/11/20240811/07da64b7b63e905cf7e3adde14e57424/sgp.png",
+            "SYDNEY LOTTO": "https://sydneylotto.direct/assets/image/logo_sydney.png",
+            "TOTOCAMBODIA": "https://totocambodialive.com/assets/img/logo.png",
+            "TOTOMALI1530": "https://totomali.com/assets/img/logo.svg",
+            "TOTOMALI2030": "https://totomali.com/assets/img/logo.svg",
+            "TOTOMALI2330": "https://totomali.com/assets/img/logo.svg",
+            "JAKARTA 1400": "https://cdn.areabermain.club/assets/cdn/az7/2024/09/26/20240926/5cec161940fa953c9893b306c3c98ddc/jakarta.webp",
+            "JAKARTA 2330": "https://cdn.areabermain.club/assets/cdn/az7/2024/09/26/20240926/5cec161940fa953c9893b306c3c98ddc/jakarta.webp",
+            "TOTOMACAU PAGI": "https://cdn.areabermain.club/assets/cdn/az1/2025/09/07/20250907/dc9e0cea8a5e80da56d0b803d30586fe/totomacau-12-photoroom-photoroom.png",
+            "TOTOMACAU SIANG": "https://cdn.areabermain.club/assets/cdn/az1/2025/09/07/20250907/dc9e0cea8a5e80da56d0b803d30586fe/totomacau-12-photoroom-photoroom.png",
+            "TOTOMACAU SORE": "https://cdn.areabermain.club/assets/cdn/az1/2025/09/07/20250907/dc9e0cea8a5e80da56d0b803d30586fe/totomacau-12-photoroom-photoroom.png",
+            "TOTOMACAU MALAM I": "https://cdn.areabermain.club/assets/cdn/az1/2025/09/07/20250907/dc9e0cea8a5e80da56d0b803d30586fe/totomacau-12-photoroom-photoroom.png",
+            "TOTOMACAU MALAM II": "https://cdn.areabermain.club/assets/cdn/az1/2025/09/07/20250907/dc9e0cea8a5e80da56d0b803d30586fe/totomacau-12-photoroom-photoroom.png",
+            "TOTOMACAU MALAM III": "https://cdn.areabermain.club/assets/cdn/az1/2025/09/07/20250907/dc9e0cea8a5e80da56d0b803d30586fe/totomacau-12-photoroom-photoroom.png",
+            "TOTOMACAU 5D SORE": "https://cdn.areabermain.club/assets/cdn/az1/2025/09/07/20250907/dc9e0cea8a5e80da56d0b803d30586fe/totomacau-12-photoroom-photoroom.png",
+            "TOTOMACAU 5D MALAM": "https://cdn.areabermain.club/assets/cdn/az1/2025/09/07/20250907/dc9e0cea8a5e80da56d0b803d30586fe/totomacau-12-photoroom-photoroom.png"
+};
+
+function hash(str){
+ let h=2166136261;
+ for(let i=0;i<str.length;i++){
+   h^=str.charCodeAt(i);
+   h=Math.imul(h,16777619);
+ }
+ return h>>>0;
+}
+function rand(min,max,key){
+ const x=Math.abs(Math.sin(hash(key))*1000000)%1;
+ return Math.floor(min+x*(max-min+1));
+}
+function list(cnt,min,max,key){
+ let a=[];
+ for(let i=0;i<cnt;i++){
+   a.push(rand(min,max,key+"-"+i).toString().padStart((max>999)?4:(max>99)?3:2,"0"));
+ }
+ return a.join(" / ");
+}
+function generate(){
+const p=document.getElementById("pasaran").value;
+if(!p){alert("Pilih pasaran.");return;}
+const d=new Date().toLocaleDateString("id-ID",{day:"2-digit",month:"long",year:"numeric"});
+const base=p+"-"+new Date().toISOString().slice(0,10); const shio=shios[rand(0,11,base+"-shio")];
+document.getElementById("hasil").innerHTML=`
+<div class="logo">
+    <img src="${images[p] || ''}" alt="${p}">
+</div>
+<table>
+<tr><th>Nama Pasaran</th><td>${p}</td></tr>
+<tr><th>Tanggal</th><td>${d}</td></tr>
+<tr><th>Bbfs Kuat</th><td>${rand(1000000,9999999,base+"-bbfs")}</td></tr>
+<tr><th>Angka Ikut</th><td>${rand(10000,99999,base+"-ikut")}</td></tr>
+<tr><th>4D (BB)</th><td>${list(5,1000,9999,base+"-4d")}</td></tr>
+<tr><th>3D (BB)</th><td>${list(4,100,999,base+"-3d")}</td></tr>
+<tr><th>2D (BB)</th><td>${list(10,10,99,base+"-2d")}</td></tr>  
+<tr><th>Colok Bebas</th><td>${list(2,1,9,base+"-cb")}</td></tr>
+<tr><th>Colok Macau</th><td>${list(3,10,99,base+"-cm")}</td></tr>
+<tr><th>Twin</th><td>${String(rand(0,9,base+"-t1"))+String(rand(0,9,base+"-t1"))} / ${String(rand(0,9,base+"-t2"))+String(rand(0,9,base+"-t2"))}</td></tr>
+<tr><th>Shio</th><td>${shio}</td></tr>
+</table>
+<button class='copy-btn' onclick='copyPrediksi()'>📋 COPY PREDIKSI</button>`;
+}
+
+function copyPrediksi(){
+ const t=document.querySelector('#hasil table');
+ if(!t)return;
+ const rows=t.querySelectorAll('tr');
+ let out='';
+ rows.forEach(r=>{
+  const th=r.querySelector('th')?.innerText.trim();
+  const td=r.querySelector('td')?.innerText.trim();
+  if(th&&td) out+=`${th} : ${td}\n`;
+ });
+ navigator.clipboard.writeText(out).then(()=>alert('Prediksi berhasil disalin!'));
+}
+
+</script>
+</div>
+</body>
+</html>
